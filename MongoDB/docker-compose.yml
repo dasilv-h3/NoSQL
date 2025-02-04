@@ -1,0 +1,12 @@
+services:
+  redis:
+    image: mongo
+    container_name: mongo-server
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data
+    restart: always
+
+volumes:
+  mongo_data:
