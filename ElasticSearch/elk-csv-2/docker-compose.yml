@@ -2,7 +2,7 @@ version: "3"
 services:
   elasticsearch:
     image: elasticsearch:7.6.2
-    container_name: elasticsearch
+    container_name: elasticsearch-elk-csv-2
     hostname: elasticsearch
     restart: always
     environment:
@@ -17,7 +17,7 @@ services:
 
   logstash:
     image: logstash:7.6.2
-    container_name: logstash
+    container_name: logstash-elk-csv-2
     hostname: logstash
     ports:
       - 9600:9600
@@ -32,10 +32,11 @@ services:
     volumes:
       - ./logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
       - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./data/data-json.csv:/usr/share/logstash/external-data/data-json.csv
 
   kibana:
     image: kibana:7.6.2
-    container_name: kibana
+    container_name: kibana-elk-csv-2
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     ports:
